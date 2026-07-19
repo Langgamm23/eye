@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>EYE · AI Exam Proctor (Web)</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="topbar">
+    <div class="brand">👁️ <span class="brand-title">EYE</span><span class="brand-sub">AI Exam Proctor · Web</span></div>
+    <div class="topbar-links">
+      <a href="/evidence.html">Evidence Viewer →</a>
+    </div>
+  </div>
+
+  <div class="layout">
+    <!-- LEFT: controls -->
+    <div class="panel left">
+      <div class="section-title">📷 CAMERA</div>
+      <button id="btnCamera" class="btn">Enable Camera</button>
+      <div class="hint" id="camHint">Grant camera access, then Start Monitoring.</div>
+
+      <div class="section-title">⏱ EXAM DURATION</div>
+      <select id="duration">
+        <option>No Limit</option>
+        <option>30 min</option>
+        <option>45 min</option>
+        <option selected>60 min</option>
+        <option>90 min</option>
+        <option>120 min</option>
+        <option>180 min</option>
+      </select>
+
+      <div class="section-title">⚙ PERFORMANCE MODE</div>
+      <select id="preset">
+        <option>Max Speed</option>
+        <option selected>Balanced</option>
+        <option>Max Accuracy</option>
+      </select>
+      <div class="hint">Pick Max Accuracy for a large room / students far from the camera.</div>
+
+      <div class="section-title">🎓 TEACHER'S SETTINGS</div>
+      <div class="card checks">
+        <label><input type="checkbox" id="chkPhone" checked> 📱 Detect Cellphones</label>
+        <label><input type="checkbox" id="chkBook" checked> 📓 Detect Notebooks/Books</label>
+        <label><input type="checkbox" id="chkWatch" checked> ⌚ Detect Smartwatches</label>
+        <label><input type="checkbox" id="chkHand" checked> 🖐 Detect Hand Gestures</label>
+      </div>
+
+      <div class="section-title">SESSION</div>
+      <input id="sessionName" class="text-input" placeholder="Session name (optional)">
+      <button id="btnStart" class="btn btn-success">▶ Start Monitoring</button>
+      <button id="btnStop" class="btn btn-danger" disabled>■ Stop Monitoring</button>
+
+      <div class="section-title">SYSTEM</div>
+      <div class="stat-row"><span>Backend</span><b id="statBackend">—</b></div>
+      <div class="stat-row"><span>Model tier</span><b id="statTier">—</b></div>
+      <div class="stat-row"><span>FPS</span><b id="statFps">0.0</b></div>
+      <div class="stat-row"><span>Exam elapsed</span><b id="statElapsed">00:00:00</b></div>
+
+      <div class="section-title">LOG</div>
+      <div id="log" class="log"></div>
+    </div>
+
+    <!-- CENTER: video -->
+    <div class="panel center">
+      <div class="video-wrap">
+        <video id="video" autoplay muted playsinline></video>
+        <canvas id="overlay"></canvas>
+        <div id="flash" class="flash"></div>
+      </div>
+      <div class="det-bar" id="detBar">Camera not started</div>
+    </div>
+
+    <!-- RIGHT: live metrics + alerts -->
+    <div class="panel right">
+      <div class="section-title">📊 METRICS</div>
+      <div class="metric-card">
+        <div class="metric-value" id="cardStudents">0</div>
+        <div class="metric-label">Students Tracked</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-value" id="cardViolations">0</div>
+        <div class="metric-label">Total Violations</div>
+      </div>
+
+      <div class="section-title">⚠ LIVE ALERTS</div>
+      <div id="alerts" class="alerts"></div>
+    </div>
+  </div>
+
+<script src="app.js"></script>
+</body>
+</html>

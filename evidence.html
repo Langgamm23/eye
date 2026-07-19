@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>EYE · Evidence Viewer</title>
+<link rel="stylesheet" href="style.css">
+<style>
+  .ev-layout { display: grid; grid-template-columns: 1fr 300px; gap: 10px; padding: 10px; height: calc(100vh - 46px); }
+  .ev-image-wrap { background: #0d0d0d; border: 1px solid #333; border-radius: 8px;
+                   display: flex; align-items: center; justify-content: center; overflow: hidden; }
+  .ev-image-wrap img { max-width: 100%; max-height: 100%; }
+  .ev-progress { text-align: center; font-family: Consolas, monospace; font-size: 22px; color: var(--green); margin: 8px 0; }
+  .ev-nav { display: flex; gap: 6px; }
+  .ev-nav .btn { flex: 1; }
+  .ev-detail { font-size: 12px; line-height: 1.8; }
+  .ev-reason { color: var(--dim); font-size: 11px; margin-top: 6px; }
+  .ev-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(90px,1fr)); gap: 6px; margin-top: 10px; max-height: 220px; overflow-y: auto; }
+  .ev-thumb { position: relative; border: 2px solid transparent; border-radius: 4px; overflow: hidden; cursor: pointer; aspect-ratio: 1; }
+  .ev-thumb img { width: 100%; height: 100%; object-fit: cover; }
+  .ev-thumb.active { border-color: var(--cyan); }
+</style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="brand">👁️ <span class="brand-title">EYE</span><span class="brand-sub">Evidence Viewer</span></div>
+    <div class="topbar-links"><a href="/">← Back to Monitoring</a></div>
+  </div>
+
+  <div class="ev-layout">
+    <div class="panel" style="display:flex;flex-direction:column;">
+      <div class="ev-image-wrap" id="imageWrap" style="flex:1;">
+        <span style="color:#666;">No evidence to display</span>
+      </div>
+      <div class="ev-nav" style="margin-top:8px;">
+        <button class="btn" id="prevBtn">◀ Prev</button>
+        <button class="btn" id="nextBtn">Next ▶</button>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="section-title">INCIDENT DETAILS</div>
+      <div class="card ev-detail" id="details">
+        <div>Student ID: —</div>
+        <div>Violation: —</div>
+        <div>Wall clock: —</div>
+        <div>Exam elapsed: —</div>
+        <div id="conf" style="color:var(--green); font-weight:600; margin-top:6px;">Confidence: —</div>
+        <div class="ev-reason" id="reason"></div>
+      </div>
+      <div class="ev-progress" id="progress">0 / 0</div>
+      <button class="btn btn-danger" id="removeBtn">Remove Record</button>
+      <button class="btn" id="refreshBtn">🔄 Refresh</button>
+
+      <div class="section-title">ALL EVIDENCE</div>
+      <div class="ev-grid" id="grid"></div>
+    </div>
+  </div>
+
+<script src="evidence.js"></script>
+</body>
+</html>
